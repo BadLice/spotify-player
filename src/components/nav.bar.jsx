@@ -20,9 +20,9 @@ const NavBarC = props => {
 
 		if (e.target.searchQuery.value.trim().length !== 0) {
 			props.search({
-				q: e.target.searchQuery.value.trim(),
+				q: e.target.searchQuery.value.trim().replace(' ', '+'),
 				type: searchType.value,
-				limit: 5
+				limit: 6
 			});
 		}
 
@@ -52,6 +52,7 @@ const NavBarC = props => {
 							<Dropdown
 								name='searchType'
 								onSelect={handleChangeSearchType}
+								className='mr-2'
 							>
 								<Dropdown.Toggle
 									variant='success'

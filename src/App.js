@@ -2,11 +2,32 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './components/nav.bar';
 import axios from 'axios';
+import SearchResultList from './components/search.result.list';
 
 export const useSearch = _TOKEN => {
-	const [result, setResult] = useState(null);
+	const [searchResult, setResult] = useState(null);
 	const [error, setError] = useState(null);
 	const [searchOptions, search] = useState(null);
+	const [nextLink, next] = useState(null);
+	const [offset, setOffset] = useState(0);
+
+	useEffect(() => {
+		if (nextLink && _TOKEN) {
+			let subscribed = true;
+
+			axios
+				.get(nextLink + '&access_token=' + _TOKEN)
+				.then(({ data }) => {
+					if (subscribed) {
+						setResult(data);
+						setOffset(offset + 1);
+					}
+				})
+				.catch(err => setError(err));
+
+			return () => (subscribed = false);
+		}
+	}, [nextLink]);
 
 	useEffect(() => {
 		if (searchOptions && _TOKEN) {
@@ -21,8 +42,8 @@ export const useSearch = _TOKEN => {
 				.get(searchLink + options)
 				.then(({ data }) => {
 					if (subscribed) {
-						console.log(data);
 						setResult(data);
+						setOffset(0);
 					}
 				})
 				.catch(err => setError(err));
@@ -31,16 +52,25 @@ export const useSearch = _TOKEN => {
 		}
 	}, [searchOptions, _TOKEN]);
 
-	return { result, search, error };
+	return { searchResult, search, next, offset, error };
 };
 
 const App = props => {
-	const { searchResult, search, error } = useSearch(props._TOKEN);
+	const { searchResult, search, next, offset, error } = useSearch(
+		props._TOKEN
+	);
+	console.log(searchResult);
 
 	return (
 		<>
 			<NavBar logged={props.logged} search={search} />
-			{searchResult && searchResult.map(item => null)}
+			{searchResult && (
+				<SearchResultList
+					searchResult={searchResult}
+					next={next}
+					offset={offset}
+				/>
+			)}
 		</>
 	);
 };
