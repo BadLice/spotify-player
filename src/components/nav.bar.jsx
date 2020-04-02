@@ -22,7 +22,8 @@ const NavBarC = props => {
 			props.search({
 				q: e.target.searchQuery.value.trim().replace(' ', '+'),
 				type: searchType.value,
-				limit: 6
+				limit: 9,
+				offset: 0 * 9
 			});
 		}
 

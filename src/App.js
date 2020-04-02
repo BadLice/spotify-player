@@ -8,26 +8,6 @@ export const useSearch = _TOKEN => {
 	const [searchResult, setResult] = useState(null);
 	const [error, setError] = useState(null);
 	const [searchOptions, search] = useState(null);
-	const [nextLink, next] = useState(null);
-	const [offset, setOffset] = useState(0);
-
-	useEffect(() => {
-		if (nextLink && _TOKEN) {
-			let subscribed = true;
-
-			axios
-				.get(nextLink + '&access_token=' + _TOKEN)
-				.then(({ data }) => {
-					if (subscribed) {
-						setResult(data);
-						setOffset(offset + 1);
-					}
-				})
-				.catch(err => setError(err));
-
-			return () => (subscribed = false);
-		}
-	}, [nextLink]);
 
 	useEffect(() => {
 		if (searchOptions && _TOKEN) {
@@ -43,7 +23,6 @@ export const useSearch = _TOKEN => {
 				.then(({ data }) => {
 					if (subscribed) {
 						setResult(data);
-						setOffset(0);
 					}
 				})
 				.catch(err => setError(err));
@@ -52,13 +31,14 @@ export const useSearch = _TOKEN => {
 		}
 	}, [searchOptions, _TOKEN]);
 
-	return { searchResult, search, next, offset, error };
+	return { searchResult, search, searchOptions, error };
 };
 
 const App = props => {
-	const { searchResult, search, next, offset, error } = useSearch(
+	const { searchResult, search, searchOptions, error } = useSearch(
 		props._TOKEN
 	);
+
 	console.log(searchResult);
 
 	return (
@@ -67,8 +47,8 @@ const App = props => {
 			{searchResult && (
 				<SearchResultList
 					searchResult={searchResult}
-					next={next}
-					offset={offset}
+					search={search}
+					searchOptions={searchOptions}
 				/>
 			)}
 		</>

@@ -10,6 +10,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
+    "react-image-appear": "^1.2.23",
     "react-scripts": "3.4.1",
     "react-scroll-text": "^1.0.1",
     "react-spotify-api": "^2.6.0"

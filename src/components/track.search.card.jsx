@@ -1,8 +1,10 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Button, Spinner } from 'react-bootstrap';
 import ScrollText from 'react-scroll-text';
+import PlayButton from './track.play.button.card';
 
 const TrackSearchCard = props => {
+	const [imageLoading, setImageLoading] = useState(true);
 	if (props.track.type !== 'track') return null;
 
 	const parse_duration = ms => {
@@ -28,6 +30,10 @@ const TrackSearchCard = props => {
 		return text;
 	};
 
+	const handleImageLoaded = () => {
+		setImageLoading(false);
+	};
+
 	return (
 		<>
 			<Card
@@ -35,7 +41,23 @@ const TrackSearchCard = props => {
 				bg='dark'
 				text='success'
 			>
-				<Card.Img variant='top' src={props.track.album.images[1].url} />
+				<center>
+					<Spinner
+						animation='grow'
+						variant='light'
+						style={{
+							margin: props.track.album.images[1].width / 2,
+							display: !imageLoading ? 'none' : 'block'
+						}}
+					/>
+				</center>
+				<Card.Img
+					variant='top'
+					src={props.track.album.images[1].url}
+					onLoad={handleImageLoaded}
+					className={imageLoading ? 'd-none' : 'd-block'}
+				/>
+
 				<Card.Body>
 					<Card.Title>
 						<ScrollText>{props.track.name}</ScrollText>
@@ -54,7 +76,8 @@ const TrackSearchCard = props => {
 							.slice(0, -2)}
 					</ScrollText>
 					{/* </Card.Text> */}
-					<Button variant='primary'>Go somewhere</Button>
+					{/* <Button variant='primary'>Go somewhere</Button> */}
+					<PlayButton />
 				</Card.Body>
 			</Card>
 		</>

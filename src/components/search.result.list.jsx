@@ -16,6 +16,8 @@ const SearchResultList = props => {
 					next={props.next}
 					resultsPerPage={6}
 					nextLink={props.searchResult.next}
+					search={props.search}
+					searchOptions={props.searchOptions}
 				/>
 			</Container>
 		</>
