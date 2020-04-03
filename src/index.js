@@ -46,13 +46,11 @@ const InitApi = props => {
 };
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<InitApi>
-				<App logged={!!false} />
-			</InitApi>
-		</BrowserRouter>
-	</React.StrictMode>,
+	<BrowserRouter>
+		<InitApi>
+			<App logged={!!false} />
+		</InitApi>
+	</BrowserRouter>,
 	document.getElementById('root')
 );
 

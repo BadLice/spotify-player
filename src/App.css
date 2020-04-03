@@ -13,3 +13,7 @@ html, body {
 #root {
 	min-height: 100%;
 }
+
+.bg-dark-2 {
+	background-color: #333 !important;
+}
