@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/spotify-player/static/css/main.a47a3b54.chunk.css",
-    "main.js": "/spotify-player/static/js/main.f2d97047.chunk.js",
-    "main.js.map": "/spotify-player/static/js/main.f2d97047.chunk.js.map",
+    "main.css": "/spotify-player/static/css/main.b3c61d28.chunk.css",
+    "main.js": "/spotify-player/static/js/main.3f30a7bc.chunk.js",
+    "main.js.map": "/spotify-player/static/js/main.3f30a7bc.chunk.js.map",
     "runtime-main.js": "/spotify-player/static/js/runtime-main.06788c8e.js",
     "runtime-main.js.map": "/spotify-player/static/js/runtime-main.06788c8e.js.map",
-    "static/js/2.d5e08e2c.chunk.js": "/spotify-player/static/js/2.d5e08e2c.chunk.js",
-    "static/js/2.d5e08e2c.chunk.js.map": "/spotify-player/static/js/2.d5e08e2c.chunk.js.map",
+    "static/js/2.63c193dd.chunk.js": "/spotify-player/static/js/2.63c193dd.chunk.js",
+    "static/js/2.63c193dd.chunk.js.map": "/spotify-player/static/js/2.63c193dd.chunk.js.map",
     "index.html": "/spotify-player/index.html",
-    "precache-manifest.57d2ca536e70704979e8cb9ba13e9c2e.js": "/spotify-player/precache-manifest.57d2ca536e70704979e8cb9ba13e9c2e.js",
+    "precache-manifest.e1b2ff09d4d5f776e9ea871e341b2a4f.js": "/spotify-player/precache-manifest.e1b2ff09d4d5f776e9ea871e341b2a4f.js",
     "service-worker.js": "/spotify-player/service-worker.js",
-    "static/css/main.a47a3b54.chunk.css.map": "/spotify-player/static/css/main.a47a3b54.chunk.css.map",
-    "static/js/2.d5e08e2c.chunk.js.LICENSE.txt": "/spotify-player/static/js/2.d5e08e2c.chunk.js.LICENSE.txt"
+    "static/css/main.b3c61d28.chunk.css.map": "/spotify-player/static/css/main.b3c61d28.chunk.css.map",
+    "static/js/2.63c193dd.chunk.js.LICENSE.txt": "/spotify-player/static/js/2.63c193dd.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.06788c8e.js",
-    "static/js/2.d5e08e2c.chunk.js",
-    "static/css/main.a47a3b54.chunk.css",
-    "static/js/main.f2d97047.chunk.js"
+    "static/js/2.63c193dd.chunk.js",
+    "static/css/main.b3c61d28.chunk.css",
+    "static/js/main.3f30a7bc.chunk.js"
   ]
 }
