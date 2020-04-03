@@ -12,10 +12,10 @@ const SearchResultList = props => {
 						<TrackSearchCard key={track.id} track={track} />
 					))}
 				<PageSelector
+					history={props.history}
 					offset={props.offset}
 					next={props.next}
 					resultsPerPage={6}
-					nextLink={props.searchResult.next}
 					search={props.search}
 					searchOptions={props.searchOptions}
 				/>

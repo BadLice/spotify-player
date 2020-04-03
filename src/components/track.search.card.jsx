@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button, Spinner } from 'react-bootstrap';
+import { Card, Spinner } from 'react-bootstrap';
 import ScrollText from 'react-scroll-text';
 import PlayButton from './track.play.button.card';
 
@@ -16,18 +16,6 @@ const TrackSearchCard = props => {
 		s = s.toFixed(0);
 
 		return m + ':' + s;
-	};
-
-	const parse_artists = artists => {
-		let text = artists
-			.reduce((acc, artist) => acc + artist.name + ', ', '')
-			.slice(0, -2);
-
-		if (text.length > 46) {
-			text = text.slice(0, -(text.length - 46 + 3)) + '...';
-		}
-
-		return text;
 	};
 
 	const handleImageLoaded = () => {

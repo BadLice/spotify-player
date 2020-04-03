@@ -1,14 +1,19 @@
 import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
-
+import { useParams } from 'react-router-dom';
 const PageSelector = props => {
+	const { type, query } = useParams();
 	const handleSearch = offset => {
 		let opt = { ...props.searchOptions };
 		opt.offset = opt.limit * offset;
-		props.search(opt);
+		props.history.push('/search/' + type + '/' + query + '/' + offset);
 	};
 
+	if (!props.searchOptions) {
+		return <></>;
+	}
 	let offset = props.searchOptions.offset / props.searchOptions.limit;
+
 	let active = offset + 1;
 	let items = [];
 	for (let number = offset + 1 - 2; number <= offset + 1 + 2; number++) {

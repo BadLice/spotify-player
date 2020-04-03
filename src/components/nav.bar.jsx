@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Navbar,
 	Nav,
@@ -8,6 +8,7 @@ import {
 	Dropdown
 } from 'react-bootstrap';
 import LoginButton from './login.button';
+import { useParams } from 'react-router-dom';
 
 const NavBarC = props => {
 	const [searchType, setSeatchType] = useState({
@@ -15,19 +16,33 @@ const NavBarC = props => {
 		value: 'track'
 	});
 
+	const { type, query, offset } = useParams();
+	const { search, history } = props;
+
+	useEffect(() => {
+		if (type && query && offset) {
+			search({
+				q: query,
+				type: type,
+				limit: 9,
+				offset: offset * 9
+			});
+		}
+	}, [type, query, offset, search]);
+
 	const handleSearch = e => {
 		e.preventDefault();
 
 		if (e.target.searchQuery.value.trim().length !== 0) {
-			props.search({
-				q: e.target.searchQuery.value.trim().replace(' ', '+'),
-				type: searchType.value,
-				limit: 9,
-				offset: 0 * 9
-			});
+			history.push(
+				'/search/' +
+					searchType.value +
+					'/' +
+					e.target.searchQuery.value.trim().replace(' ', '+') +
+					'/' +
+					0
+			);
 		}
-
-		console.log();
 	};
 
 	const handleChangeSearchType = type => {
