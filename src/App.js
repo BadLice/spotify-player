@@ -5,7 +5,7 @@ import axios from 'axios';
 import SearchResultList from './components/search.result.list';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
-export const useSearch = _TOKEN => {
+export const useSearch = (_TOKEN) => {
 	const [searchResult, setResult] = useState(null);
 	const [error, setError] = useState(null);
 	const [searchOptions, search] = useState(null);
@@ -28,7 +28,7 @@ export const useSearch = _TOKEN => {
 						setResult(data);
 					}
 				})
-				.catch(err => setError(err));
+				.catch((err) => setError(err));
 
 			return () => (subscribed = false);
 		}
@@ -43,7 +43,7 @@ export const useSearch = _TOKEN => {
 	return { searchResult, search, searchOptions, error };
 };
 
-const App = props => {
+const App = (props) => {
 	const { searchResult, search, searchOptions } = useSearch(props._TOKEN);
 
 	const history = useHistory();

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, Spinner } from 'react-bootstrap';
-import ScrollText from 'react-scroll-text';
 import PlayButton from './track.play.button.card';
+import Marquee from './marquee';
 
-const TrackSearchCard = props => {
+const TrackSearchCard = (props) => {
 	const [imageLoading, setImageLoading] = useState(true);
-	if (props.track.type !== 'track') return null;
 
-	const parse_duration = ms => {
+	const parse_duration = (ms) => {
 		let s = ms / 1000;
 		let m = Math.floor(s / 60);
 		s = s - m * 60;
@@ -22,6 +21,16 @@ const TrackSearchCard = props => {
 		setImageLoading(false);
 	};
 
+	const handleRedirectArtist = (id) => {
+		props.history.push('/artist/' + id);
+	};
+
+	const handleRedirectAlbum = (id) => {
+		props.history.push('/album/' + id);
+	};
+
+	if (props.track.type !== 'track') return null;
+
 	return (
 		<>
 			<Card
@@ -35,7 +44,7 @@ const TrackSearchCard = props => {
 						variant='light'
 						style={{
 							margin: props.track.album.images[1].width / 2,
-							display: !imageLoading ? 'none' : 'block'
+							display: !imageLoading ? 'none' : 'block',
 						}}
 					/>
 				</center>
@@ -47,25 +56,52 @@ const TrackSearchCard = props => {
 				/>
 
 				<Card.Body>
-					<Card.Title>
-						<ScrollText>{props.track.name}</ScrollText>
-					</Card.Title>
-					{/* <Card.Text> */}
+					<Marquee
+						style={{ fontSize: '20px' }}
+						className='font-weight-bold'
+					>
+						<p>{props.track.name}</p>
+					</Marquee>
 					<span className='text-info'>
 						{parse_duration(props.track.duration_ms)}
 					</span>
 					<br />
-					<ScrollText className='text-white-50'>
-						{props.track.artists
-							.reduce(
-								(acc, artist) => acc + artist.name + ', ',
-								''
-							)
-							.slice(0, -2)}
-					</ScrollText>
-					{/* </Card.Text> */}
-					{/* <Button variant='primary'>Go somewhere</Button> */}
-					<PlayButton />
+					<Marquee className='text-white-50'>
+						<p>
+							{props.track.artists.map((artist, i) => (
+								<span key={artist.id}>
+									<span
+										className='span-link'
+										onClick={() =>
+											handleRedirectArtist(artist.id)
+										}
+									>
+										{artist.name}
+									</span>
+									{i !== props.track.artists.length - 1
+										? ', '
+										: ''}
+								</span>
+							))}
+						</p>
+					</Marquee>
+					<Marquee className='text-warning'>
+						<p>
+							<span
+								className='span-link'
+								onClick={() =>
+									handleRedirectAlbum(props.track.album.id)
+								}
+							>
+								{props.track.album.name}
+							</span>
+						</p>
+					</Marquee>
+					<PlayButton
+						notifyPlayerNotSupported={
+							props.notifyPlayerNotSupported
+						}
+					/>
 				</Card.Body>
 			</Card>
 		</>
