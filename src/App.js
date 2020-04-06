@@ -12,11 +12,16 @@ export const useSearch = (_TOKEN) => {
 
 	useEffect(() => {
 		if (searchOptions && _TOKEN) {
+			let tempOptions = { ...searchOptions };
 			let subscribed = true;
 			let searchLink = 'https://api.spotify.com/v1/search?';
 
-			let options = Object.keys(searchOptions).reduce(
-				(opt, key) => opt + '&' + key + '=' + searchOptions[key],
+			if (tempOptions.type === 'none') {
+				tempOptions.type = 'album,artist,playlist,track';
+			}
+
+			let options = Object.keys(tempOptions).reduce(
+				(opt, key) => opt + '&' + key + '=' + tempOptions[key],
 				'access_token=' + _TOKEN
 			);
 

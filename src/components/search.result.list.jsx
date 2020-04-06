@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import TrackSearchCard from './track.search.card';
-import { Container, Accordion, Card, Toast } from 'react-bootstrap';
+import { Container, Toast } from 'react-bootstrap';
 import PageSelector from './page.selector';
 import SearchAccordion from './search.accordion';
 import ArtistSearchCard from './artist.search.card';
+import AlbumSearchCard from './album.search.card';
+import PlaylistSearchCard from './playlist.search.card';
 
 const SearchResultList = (props) => {
 	const [playerNotSupportedNotifyShow, notifyPlayerNotSupported] = useState(
@@ -33,6 +35,36 @@ const SearchResultList = (props) => {
 							<ArtistSearchCard
 								key={artist.id}
 								artist={artist}
+								history={props.history}
+							/>
+						))}
+					</SearchAccordion>
+				)}
+
+				{props.searchResult && props.searchResult.albums && (
+					<SearchAccordion toggle='Albums'>
+						{props.searchResult.albums.items.map((album) => (
+							<AlbumSearchCard
+								key={album.id}
+								album={album}
+								notifyPlayerNotSupported={
+									notifyPlayerNotSupported
+								}
+								history={props.history}
+							/>
+						))}
+					</SearchAccordion>
+				)}
+
+				{props.searchResult && props.searchResult.playlists && (
+					<SearchAccordion toggle='Playlists'>
+						{props.searchResult.playlists.items.map((playlist) => (
+							<PlaylistSearchCard
+								key={playlist.id}
+								playlist={playlist}
+								notifyPlayerNotSupported={
+									notifyPlayerNotSupported
+								}
 								history={props.history}
 							/>
 						))}

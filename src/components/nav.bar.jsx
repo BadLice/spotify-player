@@ -5,15 +5,15 @@ import {
 	Form,
 	FormControl,
 	Button,
-	Dropdown
+	Dropdown,
 } from 'react-bootstrap';
 import LoginButton from './login.button';
 import { useParams } from 'react-router-dom';
 
-const NavBarC = props => {
+const NavBarC = (props) => {
 	const [searchType, setSeatchType] = useState({
-		label: 'Track',
-		value: 'track'
+		label: 'No filter',
+		value: 'none',
 	});
 
 	const { type, query, offset } = useParams();
@@ -25,12 +25,12 @@ const NavBarC = props => {
 				q: query,
 				type: type,
 				limit: 9,
-				offset: offset * 9
+				offset: offset * 9,
 			});
 		}
 	}, [type, query, offset, search]);
 
-	const handleSearch = e => {
+	const handleSearch = (e) => {
 		e.preventDefault();
 
 		if (e.target.searchQuery.value.trim().length !== 0) {
@@ -45,7 +45,7 @@ const NavBarC = props => {
 		}
 	};
 
-	const handleChangeSearchType = type => {
+	const handleChangeSearchType = (type) => {
 		setSeatchType(JSON.parse(type));
 	};
 
@@ -71,7 +71,11 @@ const NavBarC = props => {
 								className='mr-2'
 							>
 								<Dropdown.Toggle
-									variant='success'
+									variant={
+										searchType.value === 'none'
+											? 'dark'
+											: 'success'
+									}
 									id='dropdown-basic'
 								>
 									{searchType.label}
@@ -80,8 +84,16 @@ const NavBarC = props => {
 								<Dropdown.Menu>
 									<Dropdown.Item
 										eventKey={JSON.stringify({
+											label: 'No filter',
+											value: 'none',
+										})}
+									>
+										No filter
+									</Dropdown.Item>
+									<Dropdown.Item
+										eventKey={JSON.stringify({
 											label: 'Track',
-											value: 'track'
+											value: 'track',
 										})}
 									>
 										Track
@@ -89,7 +101,7 @@ const NavBarC = props => {
 									<Dropdown.Item
 										eventKey={JSON.stringify({
 											label: 'Artist',
-											value: 'artist'
+											value: 'artist',
 										})}
 									>
 										Artist
@@ -97,7 +109,7 @@ const NavBarC = props => {
 									<Dropdown.Item
 										eventKey={JSON.stringify({
 											label: 'Album',
-											value: 'album'
+											value: 'album',
 										})}
 									>
 										Album
@@ -105,7 +117,7 @@ const NavBarC = props => {
 									<Dropdown.Item
 										eventKey={JSON.stringify({
 											label: 'Playlist',
-											value: 'playlist'
+											value: 'playlist',
 										})}
 									>
 										Playlist

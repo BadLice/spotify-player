@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Card, Spinner } from 'react-bootstrap';
 import PlayButton from './track.play.button.card';
 import Marquee from './marquee';

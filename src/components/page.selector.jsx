@@ -1,9 +1,9 @@
 import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import { useParams } from 'react-router-dom';
-const PageSelector = props => {
+const PageSelector = (props) => {
 	const { type, query } = useParams();
-	const handleSearch = offset => {
+	const handleSearch = (offset) => {
 		let opt = { ...props.searchOptions };
 		opt.offset = opt.limit * offset;
 		props.history.push('/search/' + type + '/' + query + '/' + offset);
